@@ -302,12 +302,12 @@ export default class DayPickerRangeController extends React.Component {
       }
 
       // Fix from https://github.com/airbnb/react-dates/pull/680 for clearing highlighted dates when startDate and
-      // endDate cleared
+      // endDate cleared. Modified to work for CT.
       if (!startDate && !endDate) {
         modifiers = this.deleteModifierFromRange(
           modifiers,
-          this.state.currentMonth,
-          this.state.currentMonth.add(numberOfMonths, 'months').endOf('month'),
+          prevStartDate.clone().subtract(1, 'day'),
+          this.state.hoverDate.clone().add(1, 'day'), // Ideally, this would be prevEndDate... Look at CT implementation
           'hovered-span',
         );
       }
